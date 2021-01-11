@@ -19,14 +19,22 @@ const showPosition = (position) => {
   console.log(position.coords.latitude, position.coords.longitude);
   fetch(
     // enter your access_key in api url
-    `https://us1.locationiq.com/v1/reverse.php?key=pk.b34c03954819f800fa527869dc9fa672&format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=17`
+    `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude},${position.coords.longitude}&key=e2f19f1d566341dfb1fe29e4b6489157`
   )
     .then((res) => {
       return res.json();
     })
     .then((data) => {
+      console.log(data);
       let display_location = document.getElementById("location");
-      display_location.innerText = data.display_name;
+      data.results.map((address) => {
+        if (address.annotations.geohash == "k3vnsv42enxuc39nfr6v") {
+          display_location.innerText = "LifeChoices Office";
+        } else {
+          display_location.innerText = "Not in LifeChoices location";
+        }
+      });
+
       /*
       let addresses = [];
       data.data.map((location) => {
