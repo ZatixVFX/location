@@ -19,13 +19,15 @@ const showPosition = (position) => {
   console.log(position.coords.latitude, position.coords.longitude);
   fetch(
     // enter your access_key in api url
-    `http://api.positionstack.com/v1/reverse?access_key=59d1e31a2c86b24426f703dcaec2ab61&query=${position.coords.latitude},${position.coords.longitude}`
+    `https://us1.locationiq.com/v1/reverse.php?key=pk.b34c03954819f800fa527869dc9fa672&format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=17`
   )
     .then((res) => {
       return res.json();
     })
     .then((data) => {
       let display_location = document.getElementById("location");
+      display_location.innerText = data.display_name;
+      /*
       let addresses = [];
       data.data.map((location) => {
         console.log(location.label);
@@ -46,6 +48,7 @@ const showPosition = (position) => {
       } else {
         display_location.innerText = "Not in LifeChoices Office";
       }
+      */
     });
 };
 
